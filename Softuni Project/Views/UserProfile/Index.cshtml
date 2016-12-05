@@ -5,21 +5,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>User Profile</h2>
+
+<h2 class="page-header"> <span class="glyphicon glyphicon-user"></span> User Profile</h2>
 
 
 @using (Html.BeginForm("ChnageProfilePicture", "UserProfile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
 
-    <div class="form-group">
+    <div class="form-group" id="userProfile">
         @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-
-            <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+            <label class="btn btn-default btn-file">
+                Browse <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" style="display: none;" />
+            </label>
 
         </div>
         
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-10" style="margin-top:10px;">
             <input type="submit" value="Upload" class="btn btn-default" />
         </div>
         
