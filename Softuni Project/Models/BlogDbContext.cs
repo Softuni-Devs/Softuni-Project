@@ -15,6 +15,7 @@ namespace Softuni_Project.Models
         {
         }
 
+
         public static BlogDbContext Create()
         {
             return new BlogDbContext();
