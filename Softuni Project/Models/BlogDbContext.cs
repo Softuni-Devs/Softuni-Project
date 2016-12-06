@@ -16,6 +16,9 @@ namespace Softuni_Project.Models
         }
 
 
+        public virtual IDbSet<TextPost> TextPosts { get; set; }
+
+
         public static BlogDbContext Create()
         {
             return new BlogDbContext();

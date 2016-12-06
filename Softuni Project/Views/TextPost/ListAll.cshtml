@@ -1,0 +1,46 @@
+@model List<Softuni_Project.Models.TextPost>
+@{
+    ViewBag.Title = "ListAll";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="col-sm-12">
+                <article>
+                    <header>
+                        <h2>
+                            @Html.ActionLink(@post.Title, "Details","TextPost",new {@id = post.Id},null)
+
+                        </h2>
+
+                    </header>
+                    
+                    <footer class="pull-left col-sm-12">
+                        <p>submitted by @post.Author.FullName , score @post.Score</p>
+                    </footer>
+
+                </article>
+                
+                
+                
+                @if (Request.IsAuthenticated)
+                {
+                     using (Html.BeginForm("LikePost", "TextPost", new {@id = post.Id}, FormMethod.Post))
+                     {
+                         <button type="submit" class="btn btn-primary"> Like </button>
+                     }
+                }
+
+
+            </div>
+            <hr/>
+
+        }
+
+    </div>
+</div>
+
