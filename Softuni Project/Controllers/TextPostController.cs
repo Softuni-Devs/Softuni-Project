@@ -113,7 +113,10 @@ namespace Softuni_Project.Controllers
                     var viewModel = new CommentViewModel { AuthorName = username, Content = commentModel.Comment };
                     //return View("_CommentPartial", viewModel);
 
-                    return RedirectToAction("Index");
+
+                    //Redirect to the current page
+                    return RedirectToAction("Details", new {id = commentModel.TextPostId});
+
                 }
             }
 
