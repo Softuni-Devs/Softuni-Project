@@ -101,6 +101,7 @@ namespace Softuni_Project.Controllers
                     var username = this.User.Identity.GetUserName();
                     var userId = this.User.Identity.GetUserId();
 
+                    
                      db.Comments.Add(new Comment()
                     {
                         AuthorId = userId,
@@ -120,7 +121,8 @@ namespace Softuni_Project.Controllers
                 }
             }
 
-            return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
+            return RedirectToAction("Details", new { id = commentModel.TextPostId });
+            //new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
         }
 
         [HttpPost]
