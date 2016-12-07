@@ -244,6 +244,7 @@
     <Content Include="Views\UserProfile\Index.cshtml" />
     <Content Include="Views\TextPost\ListAll.cshtml" />
     <Content Include="Views\TextPost\Create.cshtml" />
+    <Content Include="Views\TextPost\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -36,6 +36,32 @@ namespace Softuni_Project.Controllers
         }
 
 
+        //
+        // GET: TextPost/Details
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var database = new BlogDbContext())
+            {
+                var textPosts = database.TextPosts
+                    .Where(a => a.Id == id)
+                    .Include(a => a.Author)
+                    .First();
+
+                if (textPosts == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(textPosts);
+            }
+        }
+
+
         public ActionResult Create()
         {
             return View();
