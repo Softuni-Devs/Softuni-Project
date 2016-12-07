@@ -19,6 +19,10 @@ namespace Softuni_Project.Models
         public int Score { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
+        public bool IsAuthor(string name)
+        {
+            return this.Author.Equals(name);
+        }
 
         public static Expression<Func<TextPost, TextPostDetailsVewModel>> ToViewModel
         {

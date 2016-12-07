@@ -38,6 +38,14 @@ namespace Softuni_Project.Controllers
         }
 
 
+
+        public bool IsUserAuthorizedToEdit(TextPost textpost)
+        {
+            //Roles need to be added!
+            bool IsAdmin = this.User.IsInRole("Admin");
+            bool IsAuthor = textpost.IsAuthor(this.User.Identity.Name);
+            return IsAdmin || IsAuthor;
+        }
         //
         // GET: TextPost/Details
         public ActionResult Details(int? id)
@@ -90,7 +98,118 @@ namespace Softuni_Project.Controllers
 
         }
 
-     
+        //
+        // GET: TextPost/Edit
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var database = new BlogDbContext())
+            {
+                var textPost = database.TextPosts
+                    .Where(a => a.Id == id)
+                    .First();
+                if (textPost == null)
+                {
+                    return HttpNotFound();
+                }
+                var model = new TextPostViewModel();
+                model.Id = textPost.Id;
+                model.Title = textPost.Title;
+                model.Content = textPost.Content;
+
+                return View(model);
+            }
+        }
+        //
+        //POST: Article/Edit
+        [HttpPost]
+        [ActionName("Edit")]
+        public ActionResult Edit(TextPostViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var database = new BlogDbContext())
+                {
+                    var textPost = database.TextPosts
+                        .FirstOrDefault(a => a.Id == model.Id);
+                    if (!IsUserAuthorizedToEdit(textPost))
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                    }
+                    textPost.Title = model.Title;
+                    textPost.Content = model.Content;
+
+
+                    database.Entry(textPost).State = EntityState.Modified;
+                    database.SaveChanges();
+
+                    return RedirectToAction("Index");
+
+                }
+            }
+            return View(model);
+        }
+        //
+        // GET: TextPost/Delete
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var database = new BlogDbContext())
+            {
+                var textPost = database.TextPosts
+                    .Where(a => a.Id == id)
+                    .Include(a => a.Author)
+                    .First();
+                if (textPost == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(textPost);
+            }
+        }
+
+        //
+        //POST: TextPost/Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirm(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            using (var database = new BlogDbContext())
+            {
+                var textPost = database.TextPosts
+                    .Where(a => a.Id == id)
+                    .Include(a => a.Author)
+                    .First();
+                if (!IsUserAuthorizedToEdit(textPost))
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
+
+                if (textPost== null)
+                {
+                    return HttpNotFound();
+                }
+
+                database.TextPosts.Remove(textPost);
+                database.SaveChanges();
+
+                return RedirectToAction("Index");
+
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public ActionResult PostComment(SubmitCommentModel commentModel)

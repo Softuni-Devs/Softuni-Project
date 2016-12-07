@@ -186,6 +186,7 @@
     <Compile Include="Models\SubmitCommentModel.cs" />
     <Compile Include="Models\TextPost.cs" />
     <Compile Include="Models\TextPostDetailsVewModel.cs" />
+    <Compile Include="Models\TextPostViewModel.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -253,6 +254,8 @@
     <Content Include="Views\TextPost\Details.cshtml" />
     <Content Include="Views\Shared\_CommentPartial.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\TextPost\Delete.cshtml" />
+    <Content Include="Views\TextPost\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
