@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Softuni_Project.Models;
 using Microsoft.AspNet.Identity;
+using Softuni_Project.Extensions;
 
 namespace Softuni_Project.Controllers
 {
@@ -79,7 +80,7 @@ namespace Softuni_Project.Controllers
                     db.TextPosts.Add(post);
                     db.SaveChanges();
 
-
+                    this.AddNotification("You have successfully created a Post.", NotificationType.SUCCESS);
                     return RedirectToAction("Index");
 
                 }
