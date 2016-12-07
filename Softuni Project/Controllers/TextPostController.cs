@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Softuni_Project.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Softuni_Project.Controllers
 {
@@ -40,28 +41,25 @@ namespace Softuni_Project.Controllers
         // GET: TextPost/Details
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            if (!id.HasValue)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                RedirectToAction("Index", "Home");
             }
 
             using (var database = new BlogDbContext())
             {
-                var textPosts = database.TextPosts
-                    .Where(a => a.Id == id)
-                    .Include(a => a.Author)
-                    .First();
+                var model = database.TextPosts
+                            .Where(x => x.Id == id.Value)
+                            .Select(TextPostDetailsVewModel.ToViewModel)
+                            .FirstOrDefault();
 
-                if (textPosts == null)
-                {
-                    return HttpNotFound();
-                }
+                return View(model);
 
-                return View(textPosts);
+
             }
         }
-
-
+      
         public ActionResult Create()
         {
             return View();
@@ -91,6 +89,36 @@ namespace Softuni_Project.Controllers
 
         }
 
+     
+        [HttpPost]
+        [Authorize]
+        public ActionResult PostComment(SubmitCommentModel commentModel)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new BlogDbContext())
+                {
+                    var username = this.User.Identity.GetUserName();
+                    var userId = this.User.Identity.GetUserId();
+
+                     db.Comments.Add(new Comment()
+                    {
+                        AuthorId = userId,
+                        Content = commentModel.Comment,
+                        TextPostId = commentModel.TextPostId,
+                    });
+
+                    db.SaveChanges();
+
+                    var viewModel = new CommentViewModel { AuthorName = username, Content = commentModel.Comment };
+                    //return View("_CommentPartial", viewModel);
+
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
+        }
 
         [HttpPost]
         public ActionResult LikePost(int? id)

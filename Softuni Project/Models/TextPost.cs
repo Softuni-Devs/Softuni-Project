@@ -34,8 +34,12 @@ namespace Softuni_Project.Models
 
         public virtual ApplicationUser Author { get; set; }
 
+        public virtual ICollection<Comment> Comments { get; set; }
+
+
         public TextPost()
         {
+            Comments = new HashSet<Comment>();
             UsersLikesIDs = String.Empty;
             
         }

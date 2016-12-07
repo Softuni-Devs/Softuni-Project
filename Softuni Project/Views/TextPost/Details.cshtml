@@ -1,4 +1,4 @@
-﻿@model Softuni_Project.Models.TextPost
+﻿@model Softuni_Project.Models.TextPostDetailsVewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -13,9 +13,36 @@
         <p>
             @Model.Content
         </p>
-        <footer class="pull-left col-sm-12">
-            <p>submitted by @Model.Author.FullName , score @Model.Score</p>
+        <p>submitted by @Model.Author , score @Model.Score</p>
+    <div>
+        @foreach (var comment in Model.Comments)
+        {
+            @Html.Partial("_CommentPartial", comment)
+        }
+    </div>
+     
+        @if (User.Identity.IsAuthenticated)
+        {
+            using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
+            {
+                @Html.Hidden("TextPostId", Model.Id)
+                @Html.TextArea("comment")
+                @Html.AntiForgeryToken()
+                <br /><input type="submit" value="Submit comment" />
+            }
+        }
 
+        @section scripts{
+            @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+            <script>
+        function commentPostFailure() {
+            alert("Error");
+        }
+            </script>
+        }
+        <footer class="pull-left col-sm-12">
+            
+           
             @Html.ActionLink("Back", "ListAll", "TextPost", null, new { @class = "btn btn-default btn-xs" })
         </footer>
         
