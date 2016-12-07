@@ -3,53 +3,69 @@
     ViewBag.Title = "Details";
 }
 
+<head>
+    <link href="~/Content/TextPost.css" rel="stylesheet" type="text/css" />
+</head>
+
+
 <div class="container">
+    <!--Article Title / Content / Author-->
     <article>
         <header>
             <h2>
-                @Html.ActionLink(Model.Title, "Details", "TextPost", new { @id =Model.Id }, null)
+                @Html.ActionLink(Model.Title, "Details", "TextPost", new {@id = Model.Id}, new {style = "text-decoration:none;"})
             </h2>
         </header>
-        <p>
+
+        <p>submitted by @Model.Author , score @Model.Score</p>
+
+        <p class="content">
             @Model.Content
         </p>
-        <p>submitted by @Model.Author , score @Model.Score</p>
+
+    </article>
+
+    <!-- Edit Delete Back Buttons-->
+    <div class="pull-left col-sm-12">
+        @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+        {
+            @Html.ActionLink("Edit", "Edit", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-success btn-xs postConfigButton"})
+            @Html.ActionLink("Delete", "Delete", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-danger btn-xs postConfigButton"})
+        }
+
+     <!--   @Html.ActionLink("Back", "ListAll", "TextPost", null, new {@class = "btn btn-default btn-xs textPostBtn"}) -->
+    </div>
+
+ 
+
+    <!-- Comment Form -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
+        {
+            @Html.Hidden("TextPostId", Model.Id)
+            @Html.TextArea("comment")
+            @Html.AntiForgeryToken()
+            <br /><input type="submit" value="Save" class="btn btn-default commentButton" />
+        }
+    }
+
+    @section scripts{
+        @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
+        <script>
+            function commentPostFailure() {
+                alert("Error");
+            }
+        </script>
+    }
+    
+    <!-- Comments -->
     <div>
         @foreach (var comment in Model.Comments)
         {
             @Html.Partial("_CommentPartial", comment)
+
         }
     </div>
-     
-        @if (User.Identity.IsAuthenticated)
-        {
-            using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
-            {
-                @Html.Hidden("TextPostId", Model.Id)
-                @Html.TextArea("comment")
-                @Html.AntiForgeryToken()
-                <br /><input type="submit" value="Submit comment" />
-            }
-        }
-
-        @section scripts{
-            @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
-            <script>
-        function commentPostFailure() {
-            alert("Error");
-        }
-            </script>
-        }
-        <footer class="pull-left col-sm-12">
-            @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
-            {
-                @Html.ActionLink("Edit", "Edit", "TextPost", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
-                @Html.ActionLink("Delete", "Delete", "TextPost", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
-            }
-
-            @Html.ActionLink("Back", "ListAll", "TextPost", null, new { @class = "btn btn-default btn-xs" })
-        </footer>
-        
-    </article>
 </div>
 <hr />

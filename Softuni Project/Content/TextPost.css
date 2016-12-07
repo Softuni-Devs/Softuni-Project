@@ -1,0 +1,18 @@
+
+.content {
+    border: cornflowerblue solid 1px;
+     border-radius: 3px;
+      padding: 7px;
+
+}
+
+.postConfigButton {
+    padding: 1px 20px 1px 20px;
+    margin: 0px 3px 30px 2px;
+
+}
+
+.commentButton {
+    margin: 10px 0px 30px 0px;
+}
+
