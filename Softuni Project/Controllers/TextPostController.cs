@@ -37,8 +37,6 @@ namespace Softuni_Project.Controllers
            
         }
 
-
-
         public bool IsUserAuthorizedToEdit(TextPost textpost)
         {
             //Roles need to be added!

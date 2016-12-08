@@ -20,5 +20,11 @@ namespace Softuni_Project.Models
 
         [Required]
         public string Content { get; set; }
+
+        public bool IsAuthor(string name)
+        {
+            return this.Author.UserName.Equals(name);
+        }
+
     }
 }

@@ -1,6 +1,10 @@
 
-@model Softuni_Project.Models.CommentViewModel
-    
-
+@model Softuni_Project.Models.CommentViewModel   
 <div><strong>@Model.AuthorName:</strong> <br /> @Model.Content</div>
+
+ @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+ {
+  @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
+  @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs postConfigButton" })
+}
 <br />
