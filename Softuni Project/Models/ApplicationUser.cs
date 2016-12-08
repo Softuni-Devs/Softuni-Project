@@ -18,7 +18,6 @@ namespace Softuni_Project.Models
         [Required]
         public string FullName { get; set; }
 
-        //This is not required, so it can be null
         public byte[] UserPhoto { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

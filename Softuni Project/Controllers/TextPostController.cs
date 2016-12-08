@@ -67,12 +67,14 @@ namespace Softuni_Project.Controllers
             }
         }
       
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(TextPost post)
         {
             if (ModelState.IsValid)
@@ -98,6 +100,7 @@ namespace Softuni_Project.Controllers
 
         //
         // GET: TextPost/Edit
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -124,6 +127,7 @@ namespace Softuni_Project.Controllers
         //
         //POST: Article/Edit
         [HttpPost]
+        [Authorize]
         [ActionName("Edit")]
         public ActionResult Edit(TextPostViewModel model)
         {
@@ -152,6 +156,7 @@ namespace Softuni_Project.Controllers
         }
         //
         // GET: TextPost/Delete
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -175,6 +180,7 @@ namespace Softuni_Project.Controllers
         //
         //POST: TextPost/Delete
         [HttpPost]
+        [Authorize]
         [ActionName("Delete")]
         public ActionResult DeleteConfirm(int? id)
         {
