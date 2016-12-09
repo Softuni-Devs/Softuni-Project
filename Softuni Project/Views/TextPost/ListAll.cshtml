@@ -5,6 +5,20 @@
 
 <div class="container">
     <div class="row">
+        <table>
+            <tr>
+                <th>
+                    @Html.ActionLink("Title", "ListAll", new { sortOrder = ViewBag.TitleSortParm })
+                </th>
+             <th>
+             </th>
+
+                <th>
+                    @Html.ActionLink( "Score", "ListAll", new { sortOrder = ViewBag.ScoreSortParm })
+                </th>
+                <th></th>
+            </tr>
+        </table>
         @foreach (var post in Model)
         {
             <div class="col-sm-12">

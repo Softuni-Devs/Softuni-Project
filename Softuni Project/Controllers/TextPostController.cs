@@ -21,18 +21,34 @@ namespace Softuni_Project.Controllers
             return RedirectToAction("ListAll");
 
         }
-
-        public ActionResult ListAll()
+      
+        public ActionResult ListAll(string sortOrder)
         {
-
-            using (var db  = new BlogDbContext())
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.ScoreSortParm = sortOrder == "Score" ? "score_desc" : "Score";
+            using (var db = new BlogDbContext())
             {
                 var posts = db.TextPosts.
-                    Include(a => a.Author)
-                    .ToList();
-
-                return View(posts);
+                     Include(a => a.Author);
+                     
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        posts= posts.OrderByDescending(s => s.Title);
+                        break;
+                    case "Score":
+                        posts = posts.OrderBy(s => s.Score);
+                        break;
+                    case "score_desc":
+                      posts  = posts.OrderByDescending(s => s.Score);
+                        break;
+                    default:
+                        posts = posts.OrderBy(s => s.Title);
+                        break;
+                }
+                return View(posts.ToList());
             }
+          
             
            
         }
