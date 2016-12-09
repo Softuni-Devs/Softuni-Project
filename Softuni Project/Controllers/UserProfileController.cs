@@ -58,7 +58,7 @@ namespace Softuni_Project.Controllers
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "UserProfile");
 
         }
 

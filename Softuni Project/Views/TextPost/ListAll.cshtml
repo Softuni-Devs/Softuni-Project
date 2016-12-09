@@ -37,9 +37,7 @@
                     </footer>
 
                 </article>
-                
-                
-                
+ 
                 @if (Request.IsAuthenticated)
                 {
                      using (Html.BeginForm("LikePost", "TextPost", new {@id = post.Id}, FormMethod.Post))

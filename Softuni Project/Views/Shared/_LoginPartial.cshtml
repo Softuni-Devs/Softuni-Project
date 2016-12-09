@@ -7,12 +7,24 @@
 
         <ul class="nav navbar-nav navbar-right">
             
+
+            
             <li>
-                @Html.ActionLink("Create","Create","TextPost")
+                <img src="@Url.Action("DisplayProfilePicture", "Home" )" style="width:40px;height:40px; background: #FFFFFF;
+                                      margin: auto; margin-top: 5px;
+                                      -moz-border-radius: 60px;
+                                      border-radius: 100px;
+                                      padding: 1px;
+                                      box-shadow: 0px 0px 20px #888;" />
             </li>
 
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+                @Html.ActionLink("Profile", "Index", "UserProfile")
+            </li>
+
+            <li>
+                <!--  @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})  -->
+                @Html.ActionLink("Settings","Index","Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

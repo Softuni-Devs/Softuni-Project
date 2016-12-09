@@ -14,7 +14,7 @@ namespace Softuni_Project.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("ListAll", "TextPost");
         }
 
         public ActionResult About()
