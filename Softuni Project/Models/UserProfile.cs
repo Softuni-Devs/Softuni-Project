@@ -10,7 +10,7 @@ namespace Softuni_Project.Models
     {
 
         [Required]
-        [Display(Name = "UserPhoto")]
+        [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
 
 

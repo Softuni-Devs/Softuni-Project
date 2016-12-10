@@ -1,8 +1,10 @@
 
 .content {
     border: cornflowerblue solid 1px;
-     border-radius: 3px;
-     padding: 7px;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 7px;
+    width: 283px;
 
 }
 
@@ -19,12 +21,11 @@
 textarea {
     border-width: 2px;
     display: block;
-    width: 100%;
+    width: 600px;
     padding: 10px 15px;
     font-size: 15px;
     line-height: 1.42857143;
     color: #2c3e50;
-    background-color: #ffffff;
-    border: 1px solid #dce4ec;
+    border: 1px solid cornflowerblue;
     border-radius: 4px;
 }
