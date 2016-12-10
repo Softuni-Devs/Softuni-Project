@@ -6,8 +6,8 @@
 
 }
 
-.postConfigButton {
-    padding: 1px 20px 1px 20px;
+.postConfigButton, .textPostBtn {
+    padding: 3px 20px 3px 20px;
     margin: 0px 3px 30px 2px;
 
 }
@@ -16,3 +16,15 @@
     margin: 10px 0px 30px 0px;
 }
 
+textarea {
+    border-width: 2px;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #2c3e50;
+    background-color: #ffffff;
+    border: 1px solid #dce4ec;
+    border-radius: 4px;
+}
