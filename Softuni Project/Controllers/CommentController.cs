@@ -26,6 +26,7 @@ namespace Softuni_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             using (var database = new BlogDbContext())
             {                                
                 Comment comment = database.Comments
@@ -56,8 +57,7 @@ namespace Softuni_Project.Controllers
                     if (!IsUserAuthorizedToEdit(comment))
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
-                    }
-     
+                    }     
                         comment.Content = model.Content;
                         database.Entry(comment).State = EntityState.Modified;
                         database.SaveChanges();

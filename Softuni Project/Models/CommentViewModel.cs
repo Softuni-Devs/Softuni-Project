@@ -9,10 +9,13 @@ namespace Softuni_Project.Models
     public class CommentViewModel
     {
         public int Id { get; set; }
+
         public string AuthorName { get; set; }
 
-        public string TextPostId { get; set; }
+        [Required]
+        public int TextPostId { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
         public bool IsAuthor(string name)

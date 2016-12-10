@@ -55,7 +55,7 @@ namespace Softuni_Project.Controllers
 
         public bool IsUserAuthorizedToEdit(TextPost textpost)
         {
-            //Roles need to be added!
+            
             bool IsAdmin = this.User.IsInRole("Admin");
             bool IsAuthor = textpost.IsAuthor(this.User.Identity.Name);
             return IsAdmin || IsAuthor;
@@ -232,7 +232,7 @@ namespace Softuni_Project.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult PostComment(SubmitCommentModel commentModel)
+        public ActionResult PostComment(CommentViewModel commentModel)
         {
             if (ModelState.IsValid)
             {
@@ -240,29 +240,22 @@ namespace Softuni_Project.Controllers
                 {
                     var username = this.User.Identity.GetUserName();
                     var userId = this.User.Identity.GetUserId();
-
                     
                      db.Comments.Add(new Comment()
                     {
                         AuthorId = userId,
-                        Content = commentModel.Comment,
+                        Content = commentModel.Content,
                         TextPostId = commentModel.TextPostId,
                     });
 
                     db.SaveChanges();
 
-                    var viewModel = new CommentViewModel { AuthorName = username, Content = commentModel.Comment };
-                    //return View("_CommentPartial", viewModel);
-
-
-                    //Redirect to the current page
                     return RedirectToAction("Details", new {id = commentModel.TextPostId});
-
                 }
             }
 
             return RedirectToAction("Details", new { id = commentModel.TextPostId });
-            //new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
+            
         }
 
         [HttpPost]

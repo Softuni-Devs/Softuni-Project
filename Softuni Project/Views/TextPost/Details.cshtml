@@ -32,7 +32,6 @@
             @Html.ActionLink("Edit", "Edit", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-success btn-xs postConfigButton"})
             @Html.ActionLink("Delete", "Delete", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-danger btn-xs postConfigButton"})
         }
-
      <!--   @Html.ActionLink("Back", "ListAll", "TextPost", null, new {@class = "btn btn-default btn-xs textPostBtn"}) -->
     </div>
 
@@ -44,21 +43,13 @@
         using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
         {
             @Html.Hidden("TextPostId", Model.Id)
-            @Html.TextArea("comment")
+            @Html.TextArea("Content","")           
             @Html.AntiForgeryToken()
             <br /><input type="submit" value="Save" class="btn btn-default commentButton" />
         }
     }
 
-    @section scripts{
-        @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>*@
-        <script>
-            function commentPostFailure() {
-                alert("Error");
-            }
-        </script>
-    }
-    
+  
     <!-- Comments -->
     <div>
         @foreach (var comment in Model.Comments)
