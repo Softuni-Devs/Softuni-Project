@@ -1,0 +1,12 @@
+﻿body {
+    margin-bottom:30px;
+    margin-top:30px;
+}
+#navbarMain {
+    background-color: firebrick;
+    font-size: 1.6em;
+    padding:7px;
+}
+#logoImg:hover {
+    opacity: 0.8;
+}
