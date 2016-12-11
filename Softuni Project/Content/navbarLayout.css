@@ -1,6 +1,6 @@
 ﻿body {
-    margin-bottom:30px;
-    margin-top:30px;
+    margin-bottom: 30px;
+    margin-top: 45px;
 }
 #navbarMain {
     background-color: firebrick;
@@ -9,4 +9,18 @@
 }
 #logoImg:hover {
     opacity: 0.8;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+    font-size: 1.3em;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+.navbar-inverse:hover .navbar-brand:hover {
+    color: khaki;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+.navbar-inverse:hover .navbar-nav > li > a:hover {
+    color: khaki;
 }
