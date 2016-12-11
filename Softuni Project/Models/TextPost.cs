@@ -23,6 +23,8 @@ namespace Softuni_Project.Models
         //Likes / Dislikes 
         public int Score { get; set; }
 
+        public DateTime DatePosted { get; set; }
+
 
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string UsersLikesIDs { get; set; }
@@ -45,7 +47,9 @@ namespace Softuni_Project.Models
 
         public TextPost()
         {
+
             Comments = new HashSet<Comment>();
+            DatePosted = DateTime.Now;
             UsersLikesIDs = String.Empty;
             
         }

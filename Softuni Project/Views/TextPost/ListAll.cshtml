@@ -12,11 +12,14 @@
                 </th>
              <th>
              </th>
-
                 <th>
                     @Html.ActionLink( "Score", "ListAll", new { sortOrder = ViewBag.ScoreSortParm })
                 </th>
-                <th></th>
+                <th>
+                </th>
+                <th>
+                    @Html.ActionLink("Date Posted", "ListALL", new { sortOrder = ViewBag.DateSortParm })
+                </th>
             </tr>
         </table>
         @foreach (var post in Model)

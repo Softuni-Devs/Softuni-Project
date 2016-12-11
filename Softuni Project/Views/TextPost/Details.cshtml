@@ -22,7 +22,6 @@
         <p class="content">
             @Model.Content
         </p>
-
     </article>
 
     <!-- Edit Delete Back Buttons-->
@@ -39,13 +38,14 @@
 
     <!-- Comment Form -->
     @if (User.Identity.IsAuthenticated)
+
     {
         using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
         {
             @Html.Hidden("TextPostId", Model.Id)
             @Html.TextArea("Content","")           
             @Html.AntiForgeryToken()
-            <br /><input type="submit" value="Save" class="btn btn-default commentButton" />
+            <br /><input type="submit" value="Submit" class="btn btn-default commentButton" />
         }
     }
 

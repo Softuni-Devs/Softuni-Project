@@ -26,6 +26,7 @@ namespace Softuni_Project.Controllers
         {
             ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.ScoreSortParm = sortOrder == "Score" ? "score_desc" : "Score";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             using (var db = new BlogDbContext())
             {
                 var posts = db.TextPosts.
@@ -33,6 +34,12 @@ namespace Softuni_Project.Controllers
                      
                 switch (sortOrder)
                 {
+                    case "Date":
+                        posts = posts.OrderBy(s => s.DatePosted);
+                        break;
+                    case "date_desc":
+                       posts = posts.OrderByDescending(s => s.DatePosted);
+                        break;
                     case "name_desc":
                         posts= posts.OrderByDescending(s => s.Title);
                         break;
