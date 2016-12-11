@@ -32,15 +32,16 @@ namespace Softuni_Project.Models
                 {
                     Id = model.Id,
                     Title = model.Title,
-                    Content = model.Content,                
+                    Content = model.Content,
                     Author = model.Author.UserName,
-                    Score=model.Score,
-                 
+                    Score = model.Score,
+
                     Comments = model.Comments.Select(x => new CommentViewModel()
                     {
                         Id = x.Id,
                         AuthorName = x.Author.UserName,
-                        Content = x.Content
+                        Content = x.Content,
+                        Score = x.Score
                     })
                 };
             }

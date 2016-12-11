@@ -18,6 +18,12 @@ namespace Softuni_Project.Models
 
         public virtual TextPost TextPost { get; set; }
 
+        //Likes
+        public int Score { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string UsersLikesIDs { get; set; }
+
         [Required]
         public string Content { get; set; }
 
@@ -25,6 +31,11 @@ namespace Softuni_Project.Models
         {
             return this.Author.UserName.Equals(name);
         }
+        public Comment()
+        {
+           
+            UsersLikesIDs = String.Empty;
 
+        }
     }
 }

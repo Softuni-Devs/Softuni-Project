@@ -18,6 +18,9 @@ namespace Softuni_Project.Models
         [Required]
         public string Content { get; set; }
 
+        public int Score { get; set; }
+
+      
         public bool IsAuthor(string name)
         {
             return this.AuthorName.Equals(name);

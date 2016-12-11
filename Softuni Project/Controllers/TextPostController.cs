@@ -141,7 +141,7 @@ namespace Softuni_Project.Controllers
             }
         }
         //
-        //POST: Article/Edit
+        //POST: TextPost/Edit
         [HttpPost]
         [Authorize]
         [ActionName("Edit")]

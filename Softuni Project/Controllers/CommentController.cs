@@ -115,6 +115,35 @@ namespace Softuni_Project.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult LikeComment(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var db = new BlogDbContext())
+            {
+                var currentUserID = db.Users.First(u => u.UserName == this.User.Identity.Name).Id;
+                var currentCommentID = db.Comments.First(c => c.Id == id);
+
+                var TextPostId = currentCommentID.TextPostId;
+
+
+                if (!currentCommentID.UsersLikesIDs.Contains(currentUserID) )
+                {
+                     currentCommentID.UsersLikesIDs += currentUserID;
+                      currentCommentID.Score += 1;
+                    db.SaveChanges();
+
+                }
+                return RedirectToAction("Details", "TextPost", new { id = TextPostId });
+            }
+            
+           
+        }
         private bool IsUserAuthorizedToEdit(Comment comment)
         {
             bool IsAdmin = this.User.IsInRole("Admin");

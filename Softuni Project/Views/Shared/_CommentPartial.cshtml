@@ -1,7 +1,15 @@
 
-@model Softuni_Project.Models.CommentViewModel   
-<div><strong>@Model.AuthorName:</strong> <br /> @Model.Content</div>
+@model Softuni_Project.Models.CommentViewModel
+<div><strong>@Model.AuthorName:</strong><br /> @Model.Content</div>
+<p>score @Model.Score</p>
 
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LikeComment", "Comment", new { @id = Model.Id }, FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-primary">Like</button>
+    }
+}
  @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
  {
   @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
