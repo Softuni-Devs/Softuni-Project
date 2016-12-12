@@ -53,6 +53,19 @@ namespace Softuni_Project.Controllers
                         posts = posts.OrderBy(s => s.Title);
                         break;
                 }
+
+
+                var dbCategories = db.Categories.ToList();
+                Dictionary<int,string> categories = new Dictionary<int, string>();
+
+                foreach (var category in dbCategories)
+                {
+                    categories[category.Id] = category.Name;
+
+                }
+
+                ViewBag.Categories = categories;
+ 
                 return View(posts.ToList());
             }
           

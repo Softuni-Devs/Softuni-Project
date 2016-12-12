@@ -17,13 +17,12 @@
     <hr />
     <div class="row">
         <div class="col-md-3" id="categoriesList">
-            <div class="alert alert-info"><a href="#">category</a></div>
-            <div class="alert alert-info"><a href="#">category long name</a></div>
-            <div class="alert alert-info"><a href="#">category</a></div>
-            <div class="alert alert-info"><a href="#">category</a></div>
-            <p><a href="#">category</a></p>
-            <p><a href="#">category long name</a></p>
-            <p><a href="#">category</a></p>
+           
+            
+            @foreach (var category in ViewBag.Categories)
+            {
+                <div class="alert alert-info"><a href="#">ID - @category.Key, @category.Value </a></div>
+            }
         </div>
         <div class="col-sm-6">
             @foreach (var post in Model)
