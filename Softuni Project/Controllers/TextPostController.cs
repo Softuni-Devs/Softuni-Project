@@ -21,9 +21,11 @@ namespace Softuni_Project.Controllers
             return RedirectToAction("ListAll");
 
         }
-      
-        public ActionResult ListAll(string sortOrder)
+
+
+        public ActionResult ListAll(string sortOrder, int? id)
         {
+
             ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.ScoreSortParm = sortOrder == "Score" ? "score_desc" : "Score";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -65,13 +67,21 @@ namespace Softuni_Project.Controllers
                 }
 
                 ViewBag.Categories = categories;
+
+                if (id != null)
+                {
+                    //The user clicked on a category, show only the posts in the same one
+
+                    var categoryPosts = db.TextPosts.Where(t => t.CategoryId == id).Include(a => a.Author).ToList();
+
+                    return View(categoryPosts);
+                }
  
                 return View(posts.ToList());
-            }
-          
-            
+            } 
            
         }
+
 
         public bool IsUserAuthorizedToEdit(TextPost textpost)
         {
@@ -296,13 +306,16 @@ namespace Softuni_Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult LikePost(int? id)
+        public ActionResult LikePost(int? id, TextPost model)
         {
+
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+
 
             using (var db = new BlogDbContext())
             {
@@ -310,7 +323,7 @@ namespace Softuni_Project.Controllers
 
                 var currentPostID = db.TextPosts.First(p => p.Id == id);
                
-
+                
                 if (!currentPostID.UsersLikesIDs.Contains(currentUserID))
                 {
                     currentPostID.UsersLikesIDs += currentUserID;
@@ -321,12 +334,10 @@ namespace Softuni_Project.Controllers
 
                 }
 
+                return RedirectToAction("ListAll", new { id = currentPostID.CategoryId });
 
             }
 
-
-
-            return RedirectToAction("ListAll");
         }
 
     }
