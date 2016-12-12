@@ -170,6 +170,7 @@ namespace Softuni_Project.Controllers
 
                     database.Entry(textPost).State = EntityState.Modified;
                     database.SaveChanges();
+                    this.AddNotification("You have successfully edited your Post.", NotificationType.SUCCESS);
 
                     return RedirectToAction("Index");
 
@@ -231,6 +232,7 @@ namespace Softuni_Project.Controllers
 
                 database.TextPosts.Remove(textPost);
                 database.SaveChanges();
+                this.AddNotification("Post deleted.", NotificationType.INFO);
 
                 return RedirectToAction("Index");
 
@@ -286,6 +288,7 @@ namespace Softuni_Project.Controllers
                     currentPostID.UsersLikesIDs += currentUserID;
                     currentPostID.Score += 1;
                     db.SaveChanges();
+                    this.AddNotification("Post liked!", NotificationType.SUCCESS);
 
 
                 }

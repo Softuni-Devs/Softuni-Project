@@ -1,4 +1,5 @@
-﻿using Softuni_Project.Models;
+﻿using Softuni_Project.Extensions;
+using Softuni_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -61,6 +62,7 @@ namespace Softuni_Project.Controllers
                         comment.Content = model.Content;
                         database.Entry(comment).State = EntityState.Modified;
                         database.SaveChanges();
+                    this.AddNotification("Comment edited.", NotificationType.INFO);
 
                     return RedirectToAction("Details", "TextPost", new { id = comment.TextPostId });
                 }
@@ -110,6 +112,8 @@ namespace Softuni_Project.Controllers
            
                 database.Comments.Remove(comment);
                 database.SaveChanges();
+                this.AddNotification("Comment deleted.", NotificationType.INFO);
+
                 return RedirectToAction("Details","TextPost", new { id = comment.TextPostId });
                
             }
@@ -137,6 +141,7 @@ namespace Softuni_Project.Controllers
                      currentCommentID.UsersLikesIDs += currentUserID;
                       currentCommentID.Score += 1;
                     db.SaveChanges();
+                    this.AddNotification("Comment liked!", NotificationType.SUCCESS);
 
                 }
                 return RedirectToAction("Details", "TextPost", new { id = TextPostId });
