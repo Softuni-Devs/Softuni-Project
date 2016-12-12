@@ -1,0 +1,11 @@
+﻿body {
+}
+div > div > div > a {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.3em;
+}
+#categoriesList{
+    border-right: 5px double;
+    border-color: firebrick;
+}

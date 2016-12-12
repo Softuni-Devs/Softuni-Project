@@ -2,59 +2,57 @@
 @{
     ViewBag.Title = "ListAll";
 }
+@Styles.Render("~/Content/ListAllIndex.css")
 
 <div class="container">
     <div class="row" style="margin-top:15px;">
-        <table>
-            <tr>
-                <th>
-                    @Html.ActionLink("Title", "ListAll", new { sortOrder = ViewBag.TitleSortParm })
-                </th>
-             <th>
-             </th>
-                <th>
-                    @Html.ActionLink( "Score", "ListAll", new { sortOrder = ViewBag.ScoreSortParm })
-                </th>
-                <th>
-                </th>
-                <th>
-                    @Html.ActionLink("Date Posted", "ListALL", new { sortOrder = ViewBag.DateSortParm })
-                </th>
-            </tr>
-        </table>
-        @foreach (var post in Model)
-        {
-            <div class="col-sm-12">
-                <article>
-                    <header>
-                        <h2>
-                            @Html.ActionLink(@post.Title, "Details","TextPost",new {@id = post.Id},null)
+        <div class="col-sm-12 text-center" id="sortBy">
+            @Html.ActionLink("Title", "ListAll", new { sortOrder = ViewBag.TitleSortParm })
 
-                        </h2>
+            @Html.ActionLink("Score", "ListAll", new { sortOrder = ViewBag.ScoreSortParm })
 
-                    </header>
-                   
-                    
-                    <footer class="pull-left col-sm-12">
-                        <p>submitted by @post.Author.FullName , score @post.Score</p>
-                    </footer>
+            @Html.ActionLink("Date Posted", "ListALL", new { sortOrder = ViewBag.DateSortParm })
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3" id="categoriesList">
+            <div class="alert alert-info"><a href="#">category</a></div>
+            <div class="alert alert-info"><a href="#">category long name</a></div>
+            <div class="alert alert-info"><a href="#">category</a></div>
+            <div class="alert alert-info"><a href="#">category</a></div>
+            <p><a href="#">category</a></p>
+            <p><a href="#">category long name</a></p>
+            <p><a href="#">category</a></p>
+        </div>
+        <div class="col-sm-6">
+            @foreach (var post in Model)
+            {
+                <div class="col-sm-12">
+                    <article>
 
-                </article>
- 
-                @if (Request.IsAuthenticated)
-                {
-                     using (Html.BeginForm("LikePost", "TextPost", new {@id = post.Id}, FormMethod.Post))
-                     {
-                         <button type="submit" class="btn btn-primary"> Like </button>
-                     }
-                }
+                        <header>
+                            <h2>
+                                @Html.ActionLink(@post.Title, "Details", "TextPost", new { @id = post.Id }, null)
+                            </h2>
+                        </header>
 
+                        <footer class="pull-left col-sm-12">
+                            <p>submitted by @post.Author.FullName , score @post.Score</p>
+                        </footer>
 
-            </div>
-            <hr/>
+                    </article>
 
-        }
-
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LikePost", "TextPost", new { @id = post.Id }, FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-primary"> Like </button>
+                        }
+                    }
+                </div>
+                <hr />
+            }
+        </div>
     </div>
 </div>
-
