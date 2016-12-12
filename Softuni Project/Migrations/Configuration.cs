@@ -25,7 +25,7 @@ namespace Softuni_Project.Migrations
             if (!context.Roles.Any())
             {
                 this.CreateRole("Admin", context);
-               // this.CreateRole("User", context);
+                this.CreateRole("User", context);
 
             }
 

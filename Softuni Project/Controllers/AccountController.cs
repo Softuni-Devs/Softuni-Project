@@ -154,6 +154,9 @@ namespace Softuni_Project.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email , Email = model.Email, FullName = model.FullName};
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                var addRoleResult = UserManager.AddToRole(user.Id, "User");
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

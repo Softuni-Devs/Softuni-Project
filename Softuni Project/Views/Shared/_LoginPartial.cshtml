@@ -7,8 +7,16 @@
 
         <ul class="nav navbar-nav navbar-right">
             
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li> @Html.ActionLink("Users","List","User") </li>
+                    </ul>
+                </li>
+            }
 
-            
             <li>
                 <img src="@Url.Action("DisplayProfilePicture", "Home" )" style="width:40px;height:40px; background: #FFFFFF;
                                       margin: auto; margin-top: 5px;
