@@ -93,22 +93,30 @@ namespace Softuni_Project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            using (var databse = new BlogDbContext())
+            {
+                var model = new TextPostViewModel();
+                model.Categories= databse.Categories
+                    .OrderBy(c => c.Name)
+                    .ToList();
+                return View(model);
+            }
+                
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(TextPost post)
+        public ActionResult Create(TextPostViewModel model)
         {
             if (ModelState.IsValid)
             {
                 using (var db = new BlogDbContext())
                 {
                     var authorId = db.Users.Where(u => u.UserName == this.User.Identity.Name).First().Id;
-                    post.AuthorId = authorId;
+                    var textPost = new TextPost(authorId, model.Title, model.Content, model.CategoryId);
 
-
-                    db.TextPosts.Add(post);
+                    textPost.DatePosted = DateTime.Now;
+                    db.TextPosts.Add(textPost);
                     db.SaveChanges();
 
                     this.AddNotification("You have successfully created a Post.", NotificationType.SUCCESS);
@@ -117,7 +125,7 @@ namespace Softuni_Project.Controllers
                 }
                 
             }
-            return View(post);
+            return View(model);
 
         }
 
@@ -143,6 +151,11 @@ namespace Softuni_Project.Controllers
                 model.Id = textPost.Id;
                 model.Title = textPost.Title;
                 model.Content = textPost.Content;
+                model.CategoryId = textPost.CategoryId;
+                model.Categories = database.Categories
+                    .OrderBy(c => c.Name)
+                    .ToList();
+
 
                 return View(model);
             }
@@ -166,6 +179,7 @@ namespace Softuni_Project.Controllers
                     }
                     textPost.Title = model.Title;
                     textPost.Content = model.Content;
+                    textPost.CategoryId = model.CategoryId;
 
 
                     database.Entry(textPost).State = EntityState.Modified;
@@ -192,6 +206,7 @@ namespace Softuni_Project.Controllers
                 var textPost = database.TextPosts
                     .Where(a => a.Id == id)
                     .Include(a => a.Author)
+                    .Include(c=>c.Category)
                     .First();
                 if (textPost == null)
                 {
@@ -281,8 +296,8 @@ namespace Softuni_Project.Controllers
                 var currentUserID = db.Users.First(u => u.UserName == this.User.Identity.Name).Id;
 
                 var currentPostID = db.TextPosts.First(p => p.Id == id);
+               
 
-                
                 if (!currentPostID.UsersLikesIDs.Contains(currentUserID))
                 {
                     currentPostID.UsersLikesIDs += currentUserID;

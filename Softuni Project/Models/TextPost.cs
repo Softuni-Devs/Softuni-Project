@@ -38,6 +38,11 @@ namespace Softuni_Project.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
 
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+
+
         public bool IsAuthor(string name)
         {
             return this.Author.UserName.Equals(name);
@@ -51,7 +56,15 @@ namespace Softuni_Project.Models
             Comments = new HashSet<Comment>();
             DatePosted = DateTime.Now;
             UsersLikesIDs = String.Empty;
-            
+
+        }
+        public TextPost(string authorId,string title,string content,int categoryId)
+        {
+            this.AuthorId = authorId;
+            this.Title = title;
+            this.Content = content;
+            this.CategoryId = categoryId;
+            UsersLikesIDs = String.Empty;
         }
 
     }

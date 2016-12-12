@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Admin\CategoryController.cs" />
     <Compile Include="Controllers\Admin\UserController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BlogDbContext.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
@@ -268,6 +270,10 @@
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
