@@ -16,3 +16,6 @@ div > div > div > a {
     padding-top: 1px;
     border-radius: 10px;
 }
+button[type="submit"]{
+    padding: 1px 5px;
+}

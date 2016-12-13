@@ -5,7 +5,7 @@
 @Styles.Render("~/Content/ListAllIndex.css")
 <div class="container">
     <div class="row" style="margin-top:15px;">
-        <div class="col-sm-12 text-center" id="sortBy">
+        <div class="col-sm-offset-3 col-sm-9 text-center" id="sortBy">
             @Html.ActionLink("Title", "ListAll", new { sortOrder = ViewBag.TitleSortParm })
             @Html.ActionLink("Score", "ListAll", new { sortOrder = ViewBag.ScoreSortParm })
             @Html.ActionLink("Date Posted", "ListALL", new { sortOrder = ViewBag.DateSortParm })
