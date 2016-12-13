@@ -38,9 +38,11 @@ namespace Softuni_Project.Controllers
                 {
                     case "Date":
                         posts = posts.OrderBy(s => s.DatePosted);
+                        
                         break;
                     case "date_desc":
                        posts = posts.OrderByDescending(s => s.DatePosted);
+                        
                         break;
                     case "name_desc":
                         posts= posts.OrderByDescending(s => s.Title);
@@ -55,7 +57,7 @@ namespace Softuni_Project.Controllers
                         posts = posts.OrderBy(s => s.Title);
                         break;
                 }
-
+               
 
                 var dbCategories = db.Categories.ToList();
                 Dictionary<int,string> categories = new Dictionary<int, string>();
@@ -75,9 +77,10 @@ namespace Softuni_Project.Controllers
                     var categoryPosts = db.TextPosts.Where(t => t.CategoryId == id).Include(a => a.Author).ToList();
 
                     return View(categoryPosts);
+                    
                 }
- 
                 return View(posts.ToList());
+
             } 
            
         }

@@ -18,8 +18,8 @@ namespace Softuni_Project.Models
 
         public virtual IDbSet<TextPost> TextPosts { get; set; }
 
-        public IDbSet<Comment> Comments { get; set; }
-
+        public virtual IDbSet<Comment> Comments { get; set; }
+        
         public virtual IDbSet<Category> Categories { get; set; }
 
         public static BlogDbContext Create()
