@@ -1,23 +1,27 @@
 
 @model Softuni_Project.Models.CommentViewModel
-<div><strong>@Model.AuthorName: </strong>@Model.Content</div>
-<p>
-    score @Model.Score
-@if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("LikeComment", "Comment", new { @id = Model.Id }, FormMethod.Post))
+<div class="col-sm-offset-3 col-sm-7">
+    <div><strong>@Model.AuthorName said:</strong></div>
+    <p>
+        @Model.Content
+    </p>
+    <div>
+        score: @Model.Score
+    </div>
+    <div>
+        @if (Request.IsAuthenticated)
         {
-            <button type="submit" id="Like" class="btn btn-primary">Like</button>
+            using (Html.BeginForm("LikeComment", "Comment", new { @id = Model.Id }, FormMethod.Post))
+            {
+                <button type="submit" id="Like" class="btn btn-primary">Like</button>
+            }
         }
-    }
-</p>
 
-
-
- @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
- {
-  @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
-  @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs postConfigButton" })
-}
-<br />
+        @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+        {
+            @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
+            @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs postConfigButton" })
+        }
+    </div>
+</div>
 

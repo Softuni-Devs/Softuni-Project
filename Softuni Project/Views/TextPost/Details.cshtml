@@ -1,57 +1,78 @@
 @model Softuni_Project.Models.TextPostDetailsVewModel
- @{
+@{
     ViewBag.Title = "Details";
 }
 
 <head>
     <link href="~/Content/TextPost.css" rel="stylesheet" type="text/css" />
 </head>
+@Styles.Render("~/Content/TextPost.css")
 
 
 <div class="container">
     <!--Article Title / Content / Author-->
-    <article>
-        <header>
-            <h2>
-                @Html.ActionLink(Model.Title, "Details", "TextPost", new {@id = Model.Id}, new {style = "text-decoration:none;"})
-            </h2>
-        </header>
 
-        <p>submitted by @Model.Author , score @Model.Score</p>
-
-        <p class="content">
-            @Model.Content
-        </p>
-    </article>
-
-    <!-- Edit Delete Back Buttons-->
-    <div class="pull-left col-sm-12">
-        @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
-        {
-            @Html.ActionLink("Edit", "Edit", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-success btn-xs postConfigButton"})
-            @Html.ActionLink("Delete", "Delete", "TextPost", new {@id = Model.Id}, new {@class = "btn btn-danger btn-xs postConfigButton"})
-        }
-     @Html.ActionLink("Back", "ListAll", "TextPost", null, new {@class = "btn btn-default btn-xs textPostBtn"})
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <header>
+                <h1>
+                    @Html.ActionLink(Model.Title, "Details", "TextPost", new { @id = Model.Id }, new { style = "text-decoration:none;font-size:41px;" })
+                </h1>
+            </header>
+        </div>
     </div>
 
- 
+    <div class="row">
+        <div class="col-sm-12" id="mainContent">
+            <article>
+                @Model.Content
+            </article>
+        </div>
+        <div class="pull-right">
+            <p>submitted by @Model.Author , score @Model.Score</p>
+        </div>
+    </div>
+
+    <!-- Edit Delete Back Buttons-->
+    <div class="row">
+        <div class="text-center">
+            @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+            {
+                @Html.ActionLink("Edit", "Edit", "TextPost", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
+                @Html.ActionLink("Delete", "Delete", "TextPost", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs postConfigButton" })
+            }
+            @Html.ActionLink("Back", "ListAll", "TextPost", null, new { @class = "btn btn-default btn-xs textPostBtn" })
+        </div>
+    </div>
+
 
     <!-- Comment Form -->
     @if (User.Identity.IsAuthenticated)
-
     {
-        using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
-        {
-            @Html.Hidden("TextPostId", Model.Id)
-            @Html.TextArea("Content","")           
-            @Html.AntiForgeryToken()
-            <br /><input type="submit" value="Submit" class="btn btn-default commentButton" />
-        }
+        <div class="row">
+            <div class="col-sm-3">
+                <h2>Comment here:</h2>
+            </div>
+            <div class="col-sm-7">
+                @using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
+                {
+
+                    @Html.Hidden("TextPostId", Model.Id)
+                    @Html.TextArea("Content", "")
+                    @Html.AntiForgeryToken()
+                    <br /><input type="submit" value="Submit" class="btn btn-default commentButton col-sm-12 text-center" />
+
+                }                
+            </div>                         
+        </div>        
     }
 
-  
+
     <!-- Comments -->
-    <div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h2>Comments:</h2>
+        </div>
         @foreach (var comment in Model.Comments)
         {
             @Html.Partial("_CommentPartial", comment)
@@ -59,4 +80,3 @@
         }
     </div>
 </div>
-<hr />
