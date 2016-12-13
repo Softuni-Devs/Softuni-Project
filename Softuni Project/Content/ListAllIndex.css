@@ -9,3 +9,10 @@ div > div > div > a {
     border-right: 5px double;
     border-color: firebrick;
 }
+#allPosts .currentPost {
+    background-color: #EAEAEA;
+    padding-left: 16px;
+    padding-bottom: 29px;
+    padding-top: 1px;
+    border-radius: 10px;
+}
