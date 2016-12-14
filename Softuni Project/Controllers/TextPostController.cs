@@ -119,6 +119,13 @@ namespace Softuni_Project.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            //check if we have error messages from our last attempt to create a post
+            if (TempData["message"] != null)
+            {
+                ViewBag.Message = TempData["message"].ToString();
+            }
+
+
             using (var databse = new BlogDbContext())
             {
                 var model = new TextPostViewModel();
@@ -146,10 +153,18 @@ namespace Softuni_Project.Controllers
                     db.SaveChanges();
 
                     this.AddNotification("You have successfully created a Post.", NotificationType.SUCCESS);
+                    TempData["message"] = null;
                     return RedirectToAction("Index");
 
                 }
-                
+
+            }
+            else
+            {
+                //the create process failed, this message will be displayed 
+                TempData["message"] = "Please make sure the title and the content of your post are not empty.";
+                return RedirectToAction("Create");
+
             }
             return View(model);
 

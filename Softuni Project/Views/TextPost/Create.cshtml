@@ -6,6 +6,11 @@
 <div class="container">
     <div class="well">
         <h2>Create Article</h2>
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert-danger" style="padding: 10px">@ViewBag.Message</div>
+        }
+
         @using (Html.BeginForm("Create", "TextPost", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
@@ -24,11 +29,11 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-4 control-label" })
+                @Html.LabelFor(m => m.CategoryId, new {@class = "col-sm-4 control-label"})
                 <div class="dropdown col-sm-4">
                     @Html.DropDownListFor(m => m.CategoryId,
                         new SelectList(Model.Categories, "Id", "Name"),
-                        new { @class = "btn btn-info col-sm-12" })
+                        new {@class = "btn btn-info col-sm-12"})
                 </div>
             </div>
 

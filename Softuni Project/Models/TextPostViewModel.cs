@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +21,7 @@ namespace Softuni_Project.Models
         public string AuthorId { get; set; }
 
         [ForeignKey("Category")]
+        [Required]
         public int CategoryId { get; set; }
 
         public List<Category> Categories { get; set; }
