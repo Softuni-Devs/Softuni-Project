@@ -1,6 +1,14 @@
 #mainContent {
+    font-size:15px;
 }
-
+.authorAndScore{
+    color:##428bca;
+}
+form > textarea {
+    max-width: 100%;
+    min-width: 100%;
+    height: 120px;
+}
 .content {
     border: cornflowerblue solid 1px;
     font-size: 15px;
