@@ -5,35 +5,47 @@
     ViewBag.Title = "Index";
 }
 
+<div class="container">
+    <div class="row">
+        <h2 class="col-sm-12 text-center page-header"> <span class="glyphicon glyphicon-user"></span> User Profile</h2>
+    </div>
 
-<h2 class="page-header"> <span class="glyphicon glyphicon-user"></span> User Profile</h2>
+    @using (Html.BeginForm("ChnageProfilePicture", "UserProfile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-2">
 
-
-@using (Html.BeginForm("ChnageProfilePicture", "UserProfile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-{
-
-    <img src="@Url.Action("DisplayProfilePicture", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
+                <img src="@Url.Action("DisplayProfilePicture", "Home" )" style="width:160px;height:160px; background: #FFFFFF;
                                       margin: auto;
                                       -moz-border-radius: 60px;
                                       border-radius: 10px;
                                       padding: 5px;
                                       box-shadow: 0px 0px 20px #888;" />
-
-
-    <div class="form-group" id="userProfile">
-        @Html.LabelFor(m => m.UserPhoto, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            <label class="btn btn-default btn-file">
-                Browse <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" style="display: none;" />
-            </label>
-
+            </div>
+            <div class="col-sm-6">
+                <div>Email: </div>
+                <div>Full Name: </div>
+                <div>Number of Posts: </div>
+                <div>Total score: </div>
+            </div>
         </div>
-        
-        <div class="col-md-offset-2 col-md-10" style="margin-top:10px;">
-            <input type="submit" value="Upload" class="btn btn-default" />
+
+        <div class="row">
+
+            <div class="form-group" id="userProfile">
+                @Html.LabelFor(m => m.UserPhoto, new { @class = "col-sm-offset-2 col-sm-2 control-label" })
+                <div class="col-sm-1">
+                    <label class="btn btn-default btn-file">
+                        Browse <input type="file" name="UserPhoto" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" style="display: none;" />
+                    </label>
+
+                </div>
+
+                <div class="col-sm-1">
+                    <input type="submit" value="Upload" class="btn btn-default" />
+                </div>
+
+            </div>
         </div>
-        
-
-    </div>
-
-}
+    }
+</div>
