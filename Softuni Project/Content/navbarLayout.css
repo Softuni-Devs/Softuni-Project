@@ -3,9 +3,10 @@
     margin-top: 35px;
 }
 #navbarMain {
-    background-color: firebrick;
+    background-color: dodgerblue;
     font-size: 1.6em;
     padding:7px;
+    border-bottom-color: dodgerblue;
 }
 #logoImg:hover {
     opacity: 0.8;
