@@ -19,3 +19,10 @@ div > div > div > a {
 button[type="submit"]{
     padding: 1px 5px;
 }
+.alert.alert-info {
+    background-color:#F8F8FF;
+}
+.categoriesHeading {
+    color:#428bca;
+    margin-top: -5px;
+}

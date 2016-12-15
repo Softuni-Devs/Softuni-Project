@@ -1,14 +1,12 @@
 
 @model Softuni_Project.Models.CommentViewModel
-<div class="col-sm-offset-3 col-sm-7">
-    <div><strong>@Model.AuthorName said:</strong></div>
+<div class="col-sm-offset-3 col-sm-7 allComments">
+    <div><strong><span class="blueHeading">@Model.AuthorName</span> said:</strong></div>
     <p>
         @Model.Content
     </p>
-    <div>
-        score: @Model.Score
-    </div>
-    <div>
+    
+    <div class="formButtons">
         @if (Request.IsAuthenticated)
         {
             using (Html.BeginForm("LikeComment", "Comment", new { @id = Model.Id }, FormMethod.Post))
@@ -22,6 +20,10 @@
             @Html.ActionLink("Edit", "Edit", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs postConfigButton" })
             @Html.ActionLink("Delete", "Delete", "Comment", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs postConfigButton" })
         }
+    </div>
+
+    <div class="pull-right">
+        score: <span class="blueHeading">@Model.Score</span>
     </div>
 </div>
 

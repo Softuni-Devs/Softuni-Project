@@ -51,7 +51,7 @@
     {
         <div class="row">
             <div class="col-sm-3">
-                <h2>Comment here:</h2>
+                <h2 class="blueHeading">Comment here:</h2>
             </div>
             <div class="col-sm-7">
                 @using (Ajax.BeginForm("PostComment", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "Comments", OnFailure = "commentPostFailure" }))
@@ -71,7 +71,6 @@
     <!-- Comments -->
     <div class="row">
         <div class="col-sm-3">
-            <h2>Comments:</h2>
         </div>
         @foreach (var comment in Model.Comments)
         {
