@@ -25,10 +25,10 @@ namespace Softuni_Project.Controllers
 
         public ActionResult ListAll(string sortOrder, int? id)
         {
-
-            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.ScoreSortParm = sortOrder == "Score" ? "score_desc" : "Score";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+          
+            ViewBag.TitleSortParm = "name_order";
+            ViewBag.ScoreSortParm = "score_order";
+            ViewBag.DateSortParm = "new_posts_first";
             using (var db = new BlogDbContext())
             {
                 var posts = db.TextPosts.
@@ -36,25 +36,20 @@ namespace Softuni_Project.Controllers
                      
                 switch (sortOrder)
                 {
-                    case "Date":
-                        posts = posts.OrderBy(s => s.DatePosted);
-                        
-                        break;
-                    case "date_desc":
+                  
+                    case "new_posts_first":
                        posts = posts.OrderByDescending(s => s.DatePosted);
                         
                         break;
-                    case "name_desc":
-                        posts= posts.OrderByDescending(s => s.Title);
+                    case "name_order":
+                        posts= posts.OrderBy(s => s.Title);
                         break;
-                    case "Score":
-                        posts = posts.OrderBy(s => s.Score);
-                        break;
-                    case "score_desc":
+ 
+                    case "score_order":
                       posts  = posts.OrderByDescending(s => s.Score);
                         break;
                     default:
-                        posts = posts.OrderBy(s => s.Title);
+                        posts = posts.OrderBy(s => s.DatePosted);
                         break;
                 }
                
@@ -74,11 +69,37 @@ namespace Softuni_Project.Controllers
                 {
                     //The user clicked on a category, show only the posts in the same one
 
-                    var categoryPosts = db.TextPosts.Where(t => t.CategoryId == id).Include(a => a.Author).ToList();
+                    var categoryPosts = db.TextPosts.Where(t => t.CategoryId == id).Include(a => a.Author);
 
-                    return View(categoryPosts);
-                    
+                    ViewBag.TitleSortParm = "name_order";
+                    ViewBag.ScoreSortParm = "score_order";
+                    ViewBag.DateSortParm = "new_posts_first";
+
+                    switch (sortOrder)
+                    {
+
+                        case "new_posts_first":
+                            categoryPosts = categoryPosts.OrderByDescending(s => s.DatePosted);
+
+                            break;
+                        case "name_order":
+                            categoryPosts = categoryPosts.OrderBy(s => s.Title);
+                            break;
+
+                        case "score_order":
+                            categoryPosts = categoryPosts.OrderByDescending(s => s.Score);
+                            break;
+                        default:
+                            categoryPosts = categoryPosts.OrderBy(s => s.DatePosted);
+                            break;
+                    }
+
+
+
+                    return View(categoryPosts.ToList());
                 }
+
+
                 return View(posts.ToList());
 
             } 
