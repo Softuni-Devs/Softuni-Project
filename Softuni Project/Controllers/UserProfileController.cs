@@ -17,12 +17,44 @@ namespace Softuni_Project.Controllers
         // GET: UserProfile
         public ActionResult Index()
         {
+            ViewBag.NumberOfPosts = NumberOfPosts();
+            ViewBag.TotalScore = TotalScore();
+            ViewBag.FullName = GetFullName();
             return View();
         }
 
-
-
-
+        public string GetFullName()
+        {
+            using (var database = new BlogDbContext())
+            {
+                var userId = User.Identity.GetUserId();
+                string fullName = database.Users.FirstOrDefault(c => c.Id == userId).FullName;
+                return fullName;
+            }
+        }
+        public int NumberOfPosts()
+        {
+            using (var database = new BlogDbContext())
+            {
+                var userId = User.Identity.GetUserId();
+                int  NumberOfPost = database.TextPosts.Where(t => t.AuthorId == userId).Count();
+                return NumberOfPost;
+            }
+        }
+        public int TotalScore()
+        {
+            using (var database = new BlogDbContext())
+            {
+                var userId = User.Identity.GetUserId();
+                var posts = database.TextPosts.Where(t => t.AuthorId == userId).ToList();
+                int totalScore = 0;
+                foreach (var post in posts)
+                {
+                    totalScore += post.Score;
+                }
+                return totalScore;
+            }
+        }
         //POST 
         [HttpPost]
         public ActionResult ChnageProfilePicture()

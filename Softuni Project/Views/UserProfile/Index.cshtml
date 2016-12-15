@@ -22,11 +22,13 @@
                                       padding: 5px;
                                       box-shadow: 0px 0px 20px #888;" />
             </div>
+           
+            @{ var userEmail= HttpContext.Current.User.Identity.Name; }                     
             <div class="col-sm-6">
-                <div>Email: </div>
-                <div>Full Name: </div>
-                <div>Number of Posts: </div>
-                <div>Total score: </div>
+                <div>Email:@userEmail</div>
+                <div>Full Name:@ViewBag.FullName</div>
+                <div>Number of Posts:@ViewBag.NumberOfPosts</div>
+                <div>Total score: @ViewBag.TotalScore</div>
             </div>
         </div>
 

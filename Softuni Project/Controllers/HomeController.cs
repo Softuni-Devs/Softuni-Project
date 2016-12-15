@@ -31,8 +31,6 @@ namespace Softuni_Project.Controllers
             return View();
         }
 
-
-
         public FileContentResult DisplayProfilePicture()
         {
 
@@ -65,8 +63,7 @@ namespace Softuni_Project.Controllers
            return CreateDefaultProfilePic();
 
         }
-
-
+      
         public FileContentResult CreateDefaultProfilePic()
         {
             string fileName = HttpContext.Server.MapPath(@"~/Images/nopic.jpg");

@@ -12,7 +12,5 @@ namespace Softuni_Project.Models
         [Required]
         [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
-
-
     }
 }
