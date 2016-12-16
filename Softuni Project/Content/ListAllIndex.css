@@ -7,7 +7,7 @@ div > div > div > a {
 }
 #categoriesList{
     border-right: 5px double;
-    border-color: firebrick;
+    border-color: MidnightBlue;
 }
 #allPosts .currentPost {
     background-color: #EAEAEA;

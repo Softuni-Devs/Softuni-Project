@@ -10,7 +10,7 @@ namespace Softuni_Project.Models
     {
 
         [Required]
-        [Display(Name = "User Photo")]
+        [Display(Name = "Change your avatar:")]
         public byte[] UserPhoto { get; set; }
     }
 }

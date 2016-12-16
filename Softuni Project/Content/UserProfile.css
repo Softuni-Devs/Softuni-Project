@@ -1,0 +1,17 @@
+﻿body {
+}
+.blueColor {
+    color: #428bca;
+}
+.userProperty {
+    font-size: 17px;
+}
+#userStats {
+    vertical-align: middle;
+}
+.label-UserPhoto {
+    text-align: left;
+}
+#myBox {
+    width: 200px;
+}
