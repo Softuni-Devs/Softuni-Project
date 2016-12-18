@@ -2,10 +2,11 @@
 @{
     ViewBag.Title = "Create";
 }
+@Styles.Render("~/Content/CreateTextPost.css")
 
 <div class="container">
-    <div class="well">
-        <h2>Create Article</h2>
+    <div class="row"><h2 class="text-center blueColor"><span class="glyphicon glyphicon-pencil blackColor"></span> Create Article</h2></div>
+        
         @if (ViewBag.Message != null)
         {
             <div class="alert-danger" style="padding: 10px">@ViewBag.Message</div>
@@ -25,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Content, new { @class = "control-label col-sm-4" })
                 <div class="col-sm-4">
-                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @rows = "7" })
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @rows = "8" })
                 </div>
             </div>
             <div class="form-group">
@@ -40,12 +41,11 @@
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-4">
-                    @Html.ActionLink("Cancel", "Index", "TextPost", null, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Cancel", "Index", "TextPost", null, new { @class = "btn btn-default marginLeft" })
                     <input type="submit" value="Create" class="btn btn-success" />
                 </div>
             </div>
         }
-    </div>
 </div>
 
 

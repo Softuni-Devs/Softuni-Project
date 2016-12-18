@@ -1,0 +1,16 @@
+﻿body {
+}
+.blueColor {
+    color: #428bca;
+    margin-left: -85px;
+}
+.blackColor {
+    color: black;
+}
+.marginLeft {
+    margin-left: 63px;
+}
+label {
+    color: #428bca;
+    font-size: 1.1em;
+}
