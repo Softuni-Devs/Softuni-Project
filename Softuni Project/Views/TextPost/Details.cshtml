@@ -1,4 +1,4 @@
-@model Softuni_Project.Models.TextPostDetailsVewModel
+@model Softuni_Project.Models.TextPost
 @{
     ViewBag.Title = "Details";
 }
@@ -29,7 +29,7 @@
             </article>
         </div>
         <div class="pull-right">
-            <p>submitted by: <span class="authorAndScore">@Model.Author</span>, score <span class="authorAndScore">@Model.Score</span></p>
+            <p>submitted by: <span class="authorAndScore">@Model.Author.FullName</span>, score <span class="authorAndScore">@Model.Score</span></p>
         </div>
     </div>
 

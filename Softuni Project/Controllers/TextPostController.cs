@@ -119,21 +119,26 @@ namespace Softuni_Project.Controllers
         public ActionResult Details(int? id)
         {
 
-            if (!id.HasValue)
+            if (id == null)
             {
-                RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             using (var database = new BlogDbContext())
             {
-                var model = database.TextPosts
-                            .Where(x => x.Id == id.Value)
-                            .Select(TextPostDetailsVewModel.ToViewModel)
-                            .FirstOrDefault();
 
-                return View(model);
+                var article = database.TextPosts
+                    .Where(p => p.Id == id)
+                    .Include(p => p.Author)
+                    .Include(p => p.Comments.Select(c => c.Author))
+                    .First();
 
+                if (article == null)
+                {
+                    return HttpNotFound();
+                }
 
+                return View(article);
             }
         }
       

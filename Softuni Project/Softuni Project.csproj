@@ -190,7 +190,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\TextPost.cs" />
-    <Compile Include="Models\TextPostDetailsVewModel.cs" />
     <Compile Include="Models\TextPostViewModel.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,7 @@
 
-@model Softuni_Project.Models.CommentViewModel
+@model Softuni_Project.Models.Comment
 <div class="col-sm-offset-3 col-sm-7 allComments">
-    <div><strong><span class="blueHeading">@Model.AuthorName</span> said:</strong></div>
+    <div><strong><span class="blueHeading">@Model.Author.FullName</span> said:</strong></div>
     <p>
         @Model.Content
     </p>
