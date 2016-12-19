@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/navbarLayout.css")
     @Scripts.Render("~/bundles/modernizr")
@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="~/TextPost/ListAll" id="logoImg"><img src="~/Images/logo.png" alt="logo" width="75" /></a>
-                @Html.ActionLink("LoremIt", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TechLab", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
