@@ -11,7 +11,7 @@
         {
             using (Html.BeginForm("LikeComment", "Comment", new { @id = Model.Id }, FormMethod.Post))
             {
-                <button type="submit" id="Like" class="btn btn-primary">Like</button>
+                <button type="submit" id="Like" class="btn btn-primary"> <span class="glyphicon glyphicon-thumbs-up thumbs-up"></span> </button>
             }
         }
 

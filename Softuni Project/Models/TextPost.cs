@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Softuni_Project.Models
         public string Title { get; set; }
 
         [Required]
+        [DisplayName("Post")]
         public string Content { get; set; }
 
 

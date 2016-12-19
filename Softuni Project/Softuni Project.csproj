@@ -201,6 +201,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Comment.css" />
     <Content Include="Content\CreateTextPost.css" />
+    <Content Include="Content\EditDeleteTextPost.css" />
     <Content Include="Content\ListAllIndex.css" />
     <Content Include="Content\LoginAndRegister.css" />
     <Content Include="Content\navbarLayout.css" />

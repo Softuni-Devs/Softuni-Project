@@ -2,10 +2,13 @@
 @{
     ViewBag.Title = "Edit";
 }
+@Styles.Render("~/Content/EditDeleteTextPost.css")
 
 <div class="container">
-    <div class="well">
-        <h2>Edit Article</h2>
+    <div class="row col-md-offset-4"><h2><span class="glyphicon glyphicon-pencil"></span> <span class="colorBlue">Edit Post</span></h2></div>
+        
+    <div class="row">
+
         @using (Html.BeginForm("Edit", "TextPost", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
@@ -43,5 +46,6 @@
                 </div>
             </div>
         }
+
     </div>
 </div>
